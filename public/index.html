@@ -3,28 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shani Bot Setup</title>
+    <title>SHANI-MD | Setup</title>
     <style>
-        body { background: #0f0f0f; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-       .box { background: #1a1a1a; padding: 30px; border-radius: 12px; text-align: center; width: 90%; max-width: 400px; }
-        input, button { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: none; }
-        button { background: #25D366; color: #fff; font-weight: bold; cursor: pointer; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #0a0a0a; color: #e0e0e0; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .container { background: #111; padding: 40px; border-radius: 20px; width: 100%; max-width: 450px; border: 1px solid #222; }
+        .logo { width: 70px; height: 70px; background: linear-gradient(135deg, #8A2BE2, #4B0082); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 30px; }
+        h2 { text-align: center; color: #8A2BE2; margin-bottom: 5px; }
+        p { text-align: center; color: #888; font-size: 14px; margin-bottom: 25px; }
+        .box { background: #1a1a1a; padding: 20px; border-radius: 12px; margin-bottom: 15px; }
+        .box h3 { font-size: 16px; margin-bottom: 10px; }
+        input { width: 100%; padding: 12px; background: #0a0a0a; border: 1px solid #333; color: #fff; border-radius: 8px; font-size: 15px; }
+        button { width: 100%; padding: 14px; margin-top: 15px; border-radius: 10px; border: none; background: linear-gradient(90deg, #8A2BE2, #4B0082); color: #fff; font-weight: bold; font-size: 16px; cursor: pointer; }
+        #status { text-align: center; margin-top: 15px; color: #25D366; font-size: 14px; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h2>Shani Bot 🤖</h2>
-        <p>Owner Number Save Karo</p>
+    <div class="container">
+        <div class="logo">⚡</div>
+        <h2>SHANI-MD</h2>
+        <p>Generate Your Pairing Code</p>
+        <div class="box">
+            <h3>Quick Setup</h3>
+            <p style="text-align:left; margin:0; font-size:13px;">WhatsApp number with country code 92 ڈالو۔ + نہیں لگانا۔</p>
+        </div>
+        <p style="text-align:left; margin-bottom:5px;">WhatsApp Number</p>
         <input type="text" id="number" placeholder="923001234567">
-        <button onclick="saveNumber()">Save Owner Number</button>
-        <p id="msg" style="margin-top:15px;"></p>
+        <button onclick="setNumber()">Generate Pair Code</button>
+        <p id="status"></p>
     </div>
     <script>
-        async function saveNumber() {
+        async function setNumber() {
             const num = document.getElementById('number').value;
+            if(!num || !num.startsWith('92')) return alert('92 سے شروع ہونے والا نمبر ڈالو');
+            document.getElementById('status').innerText = 'Setting... 10 sec wait کرو';
             const res = await fetch('/save-owner', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({number: num}) });
-            const data = await res.json();
-            document.getElementById('msg').innerText = data.message + ' Ab Vercel Logs check karo 🔥';
+            document.getElementById('status').innerText = res.ok ? 'Done ✅ اب Vercel Logs میں Pairing Code آ گیا' : 'Error. Logs check کرو';
         }
     </script>
 </body>
