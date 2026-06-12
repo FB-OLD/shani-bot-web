@@ -2,7 +2,7 @@ const { default: makeWASocket, useMultiFileAuthState, fetchLatestBaileysVersion,
 const pino = require('pino');
 const fs = require('fs');
 
-let ownerNumber = '0';
+let ownerNumber = '923060725589';
 if (fs.existsSync('./owner.json')) {
     ownerNumber = JSON.parse(fs.readFileSync('./owner.json')).number;
 }
